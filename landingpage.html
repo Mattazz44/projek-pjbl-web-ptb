@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Program Studi Pemuliaan Tanaman dan Teknologi Benih</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config={
+        theme:{
+            extend:{
+                fontFamily:{
+                    poppins: ['Poppins', 'sans-serif'],
+                },
+            },
+        },
+    }
+  </script>
+
+  <style>
+    /* Kelas dasar untuk elemen yang akan dianimasi */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(30px); /* Mulai 30px ke bawah */
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    /* Kelas yang ditambahkan JS saat elemen terlihat */
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0); /* Kembali ke posisi asli */
+    }
+    
+    /* Kelas untuk animasi teks "seperti diblok" */
+    .text-reveal-on-scroll {
+      /* Mulai dengan warna ungu dari 'selection' Anda */
+      color: #d8b4fe; /* Ini adalah Tailwind 'purple-200' */
+      transition: color 1s ease-out;
+    }
+    
+    /* Saat parent (.reveal-on-scroll) mendapat kelas .is-visible */
+    .is-visible .text-reveal-on-scroll {
+      /* Transisi ke warna teks asli (gray-800) */
+      color: #1f2937; /* Ini adalah Tailwind 'gray-800' */
+      /* Beri sedikit jeda agar animasi naiknya selesai dulu */
+      transition-delay: 400ms; 
+    }
+
+    /* Efek silauan kaca pada hover */
+    .timeline-item .bg-gray-200 { /* Pilih elemen card yang ingin diberi efek */
+      position: relative;
+      overflow: hidden; /* Penting agar efek silau tidak keluar */
+      z-index: 1; /* Pastikan card di atas elemen lain jika ada tumpang tindih */
+    }
+
+    .timeline-item .bg-gray-200::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%; /* Mulai dari luar kiri */
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-25deg); /* Membuat efek miring seperti silau */
+      transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1); /* Transisi halus */
+      z-index: 10;
+    }
+
+    .timeline-item .bg-gray-200:hover::before {
+      left: 125%; /* Pindah ke luar kanan saat hover */
+    }
+  </style>
+
+</head>
+
+<body class="antialiased font-poppins bg-gray-50">
+    <!--navigasi dekstop-->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 w-full z-50 shadow-sm">
+      <nav class="max-w-7xl mx-auto py-4 px-6 flex justify-between items-center text-gray-700">
+        <a href="#"><img src="assets logo/logo.png" class="h-12" alt="Logo PTB"></a>
+        <ul class="hidden md:flex gap-8 font-semibold">
+          <li><a href="landingpage.html" class="hover:text-purple-600 transition">Beranda</a></li>
+          <li><a href="sejarahprodi.html" class="hover:text-purple-600 transition">Profil</a></li>
+          <li><a href="#artikel" class="hover:text-purple-600 transition">kegiatan</a></li>
+          <li><a href="alur pendaftaran.html"class="hover:text-purple-600 transition">Pendaftaran</a></li>
+          <li><a href="kontak.html" class="hover:text-purple-600 transition">Kontak</a></li>
+        </ul>
+        <!--button menu-->
+        <button id="menu-btn" class="md:hidden text-gray-700 text-3xl z-50" aria-label="menu">
+          ☰
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu"
+      class="fixed top-0 right-0 h-full w-64 bg-white text-gray-700 p-8 transform translate-x-full transition-transform duration-300 ease-in-out z-40">
+      <ul class="flex flex-col gap-6 pt-20 text-lg">
+          <li><a href="landingpage.html" class="hover:text-purple-600 block">Beranda</a></li>
+          <li><a href="#visi" class="hover:text-purple-600 block">Profil</a></li>
+          <li><a href="#artikel" class="hover:text-purple-600 block">kegiatan</a></li>
+          <li><a href="alur pendaftaran.html" class="hover:text-purple-600 block">Pendaftaran</a></li>
+          <li><a href="kontak.html" class="hover:text-purple-600 block">Kontak</a></li>
+      </ul>
+    </div>
+
+<!--banner-->
+  <section class="relative flex justify-center items-center text-white text-center bg-cover bg-center min-h-screen"
+    style="background-image: url('https://sv.ipb.ac.id/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-08-at-10.26.54_c3d4fa87-750x422.jpg');">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 px-4">
+      <p class="text-2xl mb-2 font-bold uppercase tracking-wider text-purple-400">
+        Selamat datang di website resmi
+      </p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+        Program Studi Pemuliaan Tanaman &<br>
+        <span class="text-green-400">Teknologi Benih</span>
+      </h1>
+      <a href="#visiprodi"
+        class="mt-8 inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
+        Jelajahi Lebih Lanjut
+      </a>
+    </div>
+  </section>
+
+<!--card-->
+<div id="fitur" class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 -mt-10 relative z-20 mb-10">
+    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center">
+      <div class="text-green-600 text-5xl mb-4">🧬</div>
+      <h3 class="font-bold text-lg text-gray-800 mb-2">Riset Genetik</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">Varietas benih unggul dengan teknologi pemuliaan terkini.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center">
+      <div class="text-green-600 text-5xl mb-4">🏭</div>
+      <h3 class="font-bold text-lg text-gray-800 mb-2">Akses Industri</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">Kemitraan kuat dengan industri benih untuk kesiapan karier.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center">
+      <div class="text-green-600 text-5xl mb-4">🎓</div>
+      <h3 class="font-bold text-lg text-gray-800 mb-2">Lulusan Kompeten</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">Siap bersaing dalam industri teknologi benih modern.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center">
+      <div class="text-green-600 text-5xl mb-4">🌱</div>
+      <h3 class="font-bold text-lg text-gray-800 mb-2">Ketahanan Pangan</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">Berperan aktif mendukung ketahanan pangan masa depan.</p>
+    </div>
+  </div>
+
+<!--visi-->
+<section id="visi" class="py-20 mb-6">
+  <h2 class="text-center text-3xl font-bold text-green-700 mb-12">
+    Visi <span class="text-green-800">Prodi</span>
+  </h2>
+
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-y-8 md:gap-y-0 md:gap-x-10 lg:gap-x-16 items-center">
+<!--gambar-->
+    <div class="relative min-h-[450px] reveal-on-scroll mb-12 md:mb-0"> 
+      <div class="grid grid-cols-5 grid-rows-5 gap-2 h-full">
+
+        <div class="col-span-3 row-span-2 rounded-xl overflow-hidden shadow-lg aspect-square">
+          <img 
+            src="assets/kegiatan1.png" 
+            alt=""
+            class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-300"
+          >
+        </div>
+
+        <div class="col-start-4 col-span-2 row-span-2 flex items-center justify-center">
+          <img 
+            src="assets/produk1.png" 
+            alt="Produk Unggulan"
+            class="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-white shadow-xl" 
+          >
+        </div>
+
+        <div class="col-start-3 col-span-3 row-span-3 rounded-2xl overflow-hidden shadow-lg aspect-square">
+          <img 
+            src="assets/kegitan2.png" 
+            alt="Kerja Sama Industri"
+            class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-300"
+          >
+        </div>
+      </div>
+
+      <div class="absolute -bottom-8 -left-1 w-48 h-48 md:w-56 md:h-56 z-10"> 
+        <img 
+          src="assets/produk2.png" 
+          alt="Inovasi Hidroponik"
+          class="w-full h-full rounded-full object-cover border-4 md:border-8 border-white shadow-2xl"
+        >
+      </div>
+    </div>
+<!--deskripsi-->
+    <div class="text-gray-700 leading-relaxed reveal-on-scroll">
+      <h3 class="text-3xl lg:text-3xl font-bold mb-4 selection:bg-purple-200 text-reveal-on-scroll">
+        Menjadi Program Studi Sarjana Terapan unggul yang dapat menghasilkan sumber daya manusia yang kompeten dan terampil, serta inovasi terapan di bidang pemuliaan tanaman dan teknologi benih.
+      </h3>
+    </div>
+
+  </div>
+</section>
+
+<!--misiprodi-->
+<section 
+  class="relative flex justify-center items-center text-white bg-no-repeat bg-center min-h-[60vh] md:min-h-[80vh]"
+  style="
+    background-image: url('template1.png');
+    background-size: cover;
+    background-position: center top;
+  ">
+    <div class="container mx-auto px-4 pt-24 pb-16 text-center sm:pt-28 md:pt-36">
+        
+        <h2 class="text-4xl font-bold mb-10 md:text-5xl md:mb-12">Misi Prodi</h2>
+        
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 md:gap-12">
+            
+            <div class="flex flex-col items-center">
+                <div class="w-28 h-28 mb-4 flex justify-center items-center bg-contain bg-no-repeat bg-center md:w-32 md:h-32 md:mb-5"
+                     style="background-image: url('shape.png');">
+                    <i class="fa-solid fa-users text-4xl md:text-5xl"></i>
+                </div>
+                <p class="max-w-[200px] text-sm md:text-base">Menciptakan Sumber daya manusia yang berkualitas</p>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="w-28 h-28 mb-4 flex justify-center items-center bg-contain bg-no-repeat bg-center md:w-32 md:h-32 md:mb-5"
+                     style="background-image: url('shape.png');">
+                    <i class="fa-solid fa-lightbulb text-4xl md:text-5xl"></i>
+                </div>
+                <p class="max-w-[200px] text-sm md:text-base">Mengembangkan teknologi terapan yang unggul</p>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="w-28 h-28 mb-4 flex justify-center items-center bg-contain bg-no-repeat bg-center md:w-32 md:h-32 md:mb-5"
+                     style="background-image: url('shape.png');">
+                    <i class="fa-solid fa-seedling text-4xl md:text-5xl"></i>
+                </div>
+                <p class="max-w-[200px] text-sm md:text-base">Menyebarluaskan teknologi benih yang inovatif guna</p>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="w-28 h-28 mb-4 flex justify-center items-center bg-contain bg-no-repeat bg-center md:w-32 md:h-32 md:mb-5"
+                     style="background-image: url('shape.png');">
+                    <i class="fa-solid fa-handshake-angle text-4xl md:text-5xl"></i>
+                </div>
+                <p class="max-w-[200px] text-sm md:text-base">Menjalin kerja sama Nasional dan Internasional</p>
+            </div>
+
+        </div>
+    </div>
+</section> 
+
+<!-- Mitra Kerjasama -->
+<section class="py-20 bg-white text-center">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-green-700 mb-16">
+    Mitra Kerjasama
+  </h2>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <div id="logo-carousel" class="relative w-full overflow-hidden">
+      <div id="logo-track" class="flex transition-transform duration-700 ease-in-out">
+
+        <!-- Setiap logo berada di dalam kotak seragam -->
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/corteva.png" alt="Logo Mitra Satu" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/sampoerna.png" alt="Logo Mitra Dua" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/lomgo3.png" alt="Logo Mitra Tiga" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/sinarmas.png" alt="Logo Mitra Empat" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/benihcitra.png" alt="Logo Mitra Lima" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/risetperkebunan.png" alt="Logo Mitra Enam" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/botaniseed.png" alt="Logo Mitra Tujuh" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/PT Bayer Indonesia 1.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/cappanahmerah.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/sygenta.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/bisi.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/biru.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/bumitama.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/tomat.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-1/2 md:w-1/4 p-4 flex justify-center items-center">
+          <div class="w-32 h-20 flex justify-center items-center">
+            <img src="assets/sanghyang.png" alt="Logo Mitra Delapan" class="max-h-full max-w-full object-contain mx-auto grayscale hover:grayscale-0 transition-all duration-300">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!--aritkel-->
+<section id="artikel" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-green-700 text-center mb-14">
+            Artikel Kami
+        </h2>
+        <div class="relative">
+            <div id="artikel-viewport" class="overflow-hidden">
+  <div id="artikel-track" class="flex transition-transform duration-500 ease-in-out -mx-4">
+    <!-- Item 1 -->
+    <div class="w-full md:w-1/2 flex-shrink-0 px-4">
+      <a href="artikel1.html" class="block">
+        <div class="relative group rounded-xl overflow-hidden shadow-lg cursor-pointer h-full">
+          <img src="assets/mentimun.png"
+               class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+               alt="Gambar Artikel Pemuliaan Mentimun">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6 text-white">
+            <h3 class="text-2xl font-bold">Pemuliaan Mentimun</h3>
+            <p class="text-sm mt-1 opacity-90">Timun lalap hibrida tahan virus dan bebas pahit</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="w-full md:w-1/2 flex-shrink-0 px-4">
+      <a href="artikel2.html" class="block">
+        <div class="relative group rounded-xl overflow-hidden shadow-lg cursor-pointer h-full">
+          <img src="assets/melon.png"
+               class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+               alt="Gambar Artikel Pemuliaan Melon">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6 text-white">
+            <h3 class="text-2xl font-bold">Pemuliaan Melon</h3>
+            <p class="text-sm mt-1 opacity-90">Menciptakan varietas unggul tahan virus dengan rasa manis maksimal</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="w-full md:w-1/2 flex-shrink-0 px-4">
+      <a href="artikel3.html" class="block">
+        <div class="relative group rounded-xl overflow-hidden shadow-lg cursor-pointer h-full">
+          <img src="assets/padi.jpg"
+               class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+               alt="Gambar Artikel Benih Unggul Padi">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6 text-white">
+            <h3 class="text-2xl font-bold">Inovasi Benih Padi</h3>
+            <p class="text-sm mt-1 opacity-90">Mengenal varietas padi tahan hama wereng</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="w-full md:w-1/2 flex-shrink-0 px-4">
+      <a href="artikel4.html" class="block">
+        <div class="relative group rounded-xl overflow-hidden shadow-lg cursor-pointer h-full">
+          <img src="assets/artikel 4.png"
+               class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+               alt="Gambar Artikel Pertanian Organik">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6 text-white">
+            <h3 class="text-2xl font-bold">Pertanian Organik</h3>
+            <p class="text-sm mt-1 opacity-90">Tips memulai kebun sayur organik di rumah</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+            <!-- Tombol Navigasi Diperbaiki -->
+            <button id="prev-btn" type="button"
+                class="absolute top-1/2 -translate-y-1/2 left-2 md:left-4 z-30
+                       p-2 bg-white/90 hover:bg-white rounded-full shadow-md
+                       transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-green-700" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <button id="next-btn" type="button"
+                class="absolute top-1/2 -translate-y-1/2 right-2 md:right-4 z-30
+                       p-2 bg-white/90 hover:bg-white rounded-full shadow-md
+                       transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-green-700" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!--animate untuk navbar-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mainContent = document.body;
+
+    // Toggle mobile menu
+    menuBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isHidden = mobileMenu.classList.toggle('translate-x-full');
+        menuBtn.textContent = isHidden ? '☰' : '✕';
+    });
+
+    // Close menu when clicking outside
+    mainContent.addEventListener('click', () => {
+        const isMenuOpen = !mobileMenu.classList.contains('translate-x-full');
+        if (isMenuOpen) {
+            mobileMenu.classList.add('translate-x-full');
+            menuBtn.textContent = '☰';
+        }
+    });
+
+    // Prevent closing when clicking inside menu
+    mobileMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+});
+</script>
+<!--caraousel mitra-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Mitra Carousel Script ---
+    const logoTrack = document.getElementById('logo-track');
+
+    if (logoTrack) {
+        const logos = logoTrack.children;
+        const totalLogos = logos.length;
+        let logosToClone = window.innerWidth >= 768 ? 4 : 2;
+
+        // Duplicate logos for seamless looping
+        for (let i = 0; i < logosToClone; i++) {
+            const clone = logos[i].cloneNode(true);
+            logoTrack.appendChild(clone);
+        }
+
+        let logoCurrentIndex = 0;
+        const intervalTime = 3500; // 3.5s
+
+        function nextLogoSlide() {
+            logoCurrentIndex++;
+
+            const itemWidth = logos[0].getBoundingClientRect().width;
+            const moveDistance = -logoCurrentIndex * itemWidth;
+            logoTrack.style.transform = `translateX(${moveDistance}px)`;
+
+            // Reset when reaching original end
+            if (logoCurrentIndex >= totalLogos) {
+                setTimeout(() => {
+                    logoTrack.style.transition = 'none';
+                    logoCurrentIndex = 0;
+                    logoTrack.style.transform = `translateX(0)`;
+
+                    setTimeout(() => {
+                        logoTrack.style.transition = 'transform 0.7s ease-in-out';
+                    }, 50);
+                }, 700);
+            }
+        }
+
+        setInterval(nextLogoSlide, intervalTime);
+    }
+
+});
+</script>
+<!--animasi button artikel-->
+<script>
+const track = document.getElementById("artikel-track");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+
+let currentIndex = 0;
+let itemsPerView;
+let totalItems = track.children.length;
+let maxIndex;
+
+function getCardFullWidth() {
+    const card = track.children[0];
+    const style = window.getComputedStyle(card);
+    const width = card.offsetWidth;
+    const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    return width + margin;
+}
+
+function updateConfig() {
+    itemsPerView = window.innerWidth >= 768 ? 2 : 1;
+    maxIndex = totalItems - itemsPerView;
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+}
+
+function updateSlider() {
+    updateConfig();
+
+    const moveX = getCardFullWidth() * currentIndex;
+    track.style.transform = `translateX(-${moveX}px)`;
+
+    prevBtn.disabled = currentIndex <= 0;
+    nextBtn.disabled = currentIndex >= maxIndex;
+}
+
+nextBtn.addEventListener("click", () => {
+    if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateSlider();
+    }
+});
+
+prevBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+    }
+});
+
+window.addEventListener("resize", () => {
+    updateSlider();
+});
+
+updateSlider();
+</script>
+
+<!--Animasi visi-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Opsi untuk Intersection Observer
+  const observerOptions = {
+    root: null, // 'root' null berarti relatif terhadap viewport
+    rootMargin: '0px',
+    threshold: 0.2 // Triger animasi saat 20% elemen terlihat
+  };
+
+  // Callback function saat elemen teramati
+  const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+      // Jika elemen masuk ke viewport
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible'); // Tambahkan kelas untuk memicu animasi
+        observer.unobserve(entry.target); // Berhenti mengamati setelah animasi dipicu
+      }
+    });
+  };
+
+  // Buat observer baru
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+  // Ambil semua elemen yang ingin dianimasi
+  const elementsToReveal = document.querySelectorAll('.reveal-on-scroll');
+  
+  // Amati setiap elemen
+  elementsToReveal.forEach(el => {
+    observer.observe(el);
+  });
+});
+</script>
+</body>
+<!-- FOOTER -->
+<footer class="bg-green-900 text-white pt-16 pb-6">
+
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+    
+    <!-- Kolom 1: Logo dan Alamat -->
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <img src="assets logo/logoputih.png" alt="PTB Logo" class="h-14">
+      </div>
+
+      <p class="text-sm leading-relaxed selection:bg-purple-400">
+        Jl. Kumbang No.14, RT.02/RW.06, Babakan,<br>
+        Kecamatan Bogor Tengah, Kota Bogor,<br>
+        Jawa Barat 16128
+      </p>
+
+      <div class="flex gap-4 mt-5">
+        <a href="#" class="hover:opacity-70  transition">
+          <i class="fa-brands fa-instagram text-xl"></i>
+        </a>
+        <a href="#" class="hover:opacity-70 transition">
+          <i class="fa-brands fa-facebook text-xl"></i>
+        </a>
+        <a href="#" class="hover:opacity-70 transition">
+          <i class="fa-brands fa-youtube text-xl"></i>
+        </a>
+        <a href="#" class="hover:opacity-70 transition">
+          <i class="fa-brands fa-tiktok text-xl"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Kolom 2: Menu -->
+    <div>
+      <h4 class="text-xl font-bold mb-5">Menu</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="landingpage.html" class="hover:text-purple-600">Beranda</a></li>
+        <li><a href="sejarahprodi.html" class="hover:text-purple-600">Profil</a></li>
+        <li><a href="#" class="hover:text-purple-600">Galeri</a></li>
+        <li><a href="alur pendaftaran.html" class="hover:text-purple-600">Pendaftaran</a></li>
+        <li><a href="kontak.html" class="hover:text-purple-600">Kontak</a></li>
+      </ul>
+    </div>
+
+     <!-- Kolom 3: Kontak -->
+    <div>
+      <h4 class="text-xl font-bold mb-5">Kontak</h4>
+      <p class="text-sm mb-3">+62 0000000000</p>
+      <p class="text-sm">ptb@apps.ipb.ac.id</p>
+    </div>
+
+  </div>
+
+  <!-- Garis Pemisah -->
+  <div class="border-t border-white/30 mt-12 pt-4 text-center">
+    <p class="text-sm">
+      Copyright 2025 Pohon Toge Kelompok 4 B2
+    </p>
+  </div>
+
+</footer>
+
+<!-- Tambahkan Font Awesome untuk ikon medsos -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>Program Studi Pemuliaan Tanaman dan Teknologi Benih</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config={
+        theme:{
+            extend:{
+                fontFamily:{
+                    poppins: ['Poppins', 'sans-serif'],
+                },
+            },
+        },
+    }
+  </script>
+</head>
+
+<body class="antialiased font-poppins bg-gray-50">
+    <!--navigasi dekstop-->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 w-full z-50 shadow-sm">
+      <nav class="max-w-7xl mx-auto py-4 px-6 flex justify-between items-center text-gray-700">
+        <a href="#"><img src="assets logo/logo.png" class="h-12" alt="Logo PTB"></a>
+        <ul class="hidden md:flex gap-8 font-semibold">
+          <li><a href="landingpage.html" class="hover:text-purple-600 transition">Beranda</a></li>
+          <li><a href="sejarahprodi.html" class="hover:text-purple-600 transition">Profil</a></li>
+          <li><a href="#artikel" class="hover:text-purple-600 transition">kegiatan</a></li>
+          <li><a href="alur pendaftaran.html"class="hover:text-purple-600 transition">Pendaftaran</a></li>
+          <li><a href="kontak.html" class="hover:text-purple-600 transition">Kontak</a></li>
+        </ul>
+        <!--button menu-->
+        <button id="menu-btn" class="md:hidden text-gray-700 text-3xl z-50" aria-label="menu">
+          ☰
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu"
+      class="fixed top-0 right-0 h-full w-64 bg-white text-gray-700 p-8 transform translate-x-full transition-transform duration-300 ease-in-out z-40">
+      <ul class="flex flex-col gap-6 pt-20 text-lg">
+          <li><a href="landingpage.html" class="hover:text-purple-600 block">Beranda</a></li>
+          <li><a href="sejarahprodi.html" class="hover:text-purple-600 block">Profil</a></li>
+          <li><a href="#artikel" class="hover:text-purple-600 block">kegiatan</a></li>
+          <li><a href="alur pendaftaran.html" class="hover:text-purple-600 block">Pendaftaran</a></li>
+          <li><a href="kontak.html" class="hover:text-purple-600 block">Kontak</a></li>
+      </ul>
+    </div>
+ <!-- Spacer supaya konten gak ketutup navbar -->
+  <div class="h-20"></div>
+
+  <!-- Konten Utama -->
+  <main class="flex-1">
+    <!-- Gambar Utama -->
+    <section class="container mx-auto mt-4 px-6">
+      <img src="assets/padi.jpg" alt="Pemuliaan Mentimun" class="rounded-2xl shadow-lg w-full object-cover" />
+    </section>
+
+    <!-- Artikel -->
+    <section class="container mx-auto px-6 py-10 max-w-4xl">
+      <h2 class="text-3xl font-bold text-green-700 leading-snug mb-4">
+         Inovasi Benih Padi: Mengenal Varietas Padi Tahan Hama Wereng
+      </h2>
+
+      <!-- Info Penulis -->
+      <div class="flex items-center gap-3 mb-8">
+        <img src="assets/penulis3.png" alt="Foto Penulis" class="w-10 h-10 rounded-full object-cover border border-gray-300" />
+        <div>
+          <p class="text-sm font-semibold text-gray-700">Henny Rusmiyati,S.P., M.Si.</p>
+          <p class="text-xs text-gray-500">12 febuari 2025</p>
+        </div>
+      </div>
+
+      <p class="text-justify mb-6">
+        Padi merupakan komoditas pangan utama di Indonesia. Namun, ancaman hama wereng batang cokelat sering menjadi mimpi buruk bagi para petani, karena serangannya dapat menyebabkan gagal panen secara massal. Untuk menjawab tantangan ini, para peneliti dari berbagai lembaga pertanian terus berinovasi mengembangkan varietas padi yang tangguh dan adaptif terhadap serangan hama wereng.
+      </p>
+
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">Mengapa Wereng Menjadi Ancaman Serius?</h3>
+      <p class="text-justify mb-6">
+        Hama wereng batang cokelat (Nilaparvata lugens) dapat berkembang biak dengan cepat dan menyerang jaringan tanaman padi, menyebabkan tanaman menjadi layu dan mati. Selain itu, wereng juga menjadi vektor penyebar virus kerdil hampa dan kerdil rumput, yang memperparah kerusakan di lahan pertanian. Oleh karena itu, ketahanan genetik terhadap hama ini menjadi fokus utama dalam penelitian pemuliaan padi modern.
+      </p>
+
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">Varietas Unggul Tahan Wereng</h3>
+      <p class="text-justify mb-6">
+        Melalui proses seleksi dan persilangan yang panjang, lahirlah varietas padi unggul seperti Inpari 33,Ciherang Sub 1, dan Inpari 42 Agritan GSR. Varietas-varietas ini memiliki gen ketahanan terhadap wereng dan tetap mampu berproduksi tinggi dalam kondisi tekanan hama. Selain tahan terhadap penyakit, varietas tersebut juga memiliki kualitas beras yang baik, rasa pulen, serta umur panen yang relatif pendek.
+      </p>
+
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">Manfaat Bagi Petani dan Lingkungan</h3>
+      <p class="text-justify">
+        Penggunaan benih tahan wereng tidak hanya menekan kerugian ekonomi akibat serangan hama, tetapi juga membantu mengurangi penggunaan pestisida kimia yang berlebihan. Hal ini berdampak positif pada keseimbangan ekosistem sawah, meningkatkan keberlanjutan lingkungan, dan menjaga kesehatan petani. Dengan demikian, inovasi ini menjadi langkah nyata menuju pertanian padi yang lebih ramah lingkungan dan berdaya saing tinggi.
+      </p>
+    </section>
+  </main>
+<!--animate untuk navbar-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mainContent = document.body;
+
+    // Toggle mobile menu
+    menuBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isHidden = mobileMenu.classList.toggle('translate-x-full');
+        menuBtn.textContent = isHidden ? '☰' : '✕';
+    });
+
+    // Close menu when clicking outside
+    mainContent.addEventListener('click', () => {
+        const isMenuOpen = !mobileMenu.classList.contains('translate-x-full');
+        if (isMenuOpen) {
+            mobileMenu.classList.add('translate-x-full');
+            menuBtn.textContent = '☰';
+        }
+    });
+
+    // Prevent closing when clicking inside menu
+    mobileMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+});
+</script>
+</body>
+<!-- FOOTER -->
+<footer class="bg-green-900 text-white pt-16 pb-6">
+
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+    
+    <!-- Kolom 1: Logo dan Alamat -->
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <img src="assets logo/logoputih.png" alt="PTB Logo" class="h-14">
+      </div>
+
+      <p class="text-sm leading-relaxed selection:bg-purple-400">
+        Jl. Kumbang No.14, RT.02/RW.06, Babakan,<br>
+        Kecamatan Bogor Tengah, Kota Bogor,<br>
+        Jawa Barat 16128
+      </p>
+
+      <div class="flex gap-4 mt-5">
+        <a href="#" class="hover:opacity-70  transition">
+          <i class="fa-brands fa-instagram text-xl"></i>
+        </a>
+        <a href="#" class="hover:opacity-70 transition">
+          <i class="fa-brands fa-facebook text-xl"></i>
+        </a>
+        <a href="#" class="hover:opacity-70 transition">
+          <i class="fa-brands fa-youtube text-xl"></i>
+        </a>
+        <a href="#" class="hover:opacity-70 transition">
+          <i class="fa-brands fa-tiktok text-xl"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Kolom 2: Menu -->
+    <div>
+      <h4 class="text-xl font-bold mb-5">Menu</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="landingpage.html" class="hover:text-purple-600">Beranda</a></li>
+        <li><a href="sejarahprodi.html" class="hover:text-purple-600">Profil</a></li>
+        <li><a href="#" class="hover:text-purple-600">Galeri</a></li>
+        <li><a href="alur pendaftaran.html" class="hover:text-purple-600">Pendaftaran</a></li>
+        <li><a href="kontak.html" class="hover:text-purple-600">Kontak</a></li>
+      </ul>
+    </div>
+
+     <!-- Kolom 3: Kontak -->
+    <div>
+      <h4 class="text-xl font-bold mb-5">Kontak</h4>
+      <p class="text-sm mb-3">+62 0000000000</p>
+      <p class="text-sm">ptb@apps.ipb.ac.id</p>
+    </div>
+
+  </div>
+
+  <!-- Garis Pemisah -->
+  <div class="border-t border-white/30 mt-12 pt-4 text-center">
+    <p class="text-sm">
+      Copyright 2025 Pohon Toge Kelompok 4 B2
+    </p>
+  </div>
+
+</footer>
+
+<!-- Tambahkan Font Awesome untuk ikon medsos -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</html>
